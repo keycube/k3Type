@@ -28,4 +28,10 @@ public class Projectile : MonoBehaviour
 		Vector3 direction = target.position - transform.position;
 		transform.Translate(direction * speed * Time.deltaTime, Space.World);
 	}
+
+	
+	public void SetTarget(Transform target) 
+	{
+		this.target = target;
+	}
 }
