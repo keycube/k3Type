@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
 
 	public float rotationSpeed;
 
-	private float z;
+	private float degrees;
 
 	// Use this for initialization
 	void Start () 
@@ -25,9 +25,9 @@ public class Projectile : MonoBehaviour
 		transform.LookAt(target);
 		transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
 		
-		// Rotate around Z axis, because simple transform.Rotate(...) have a strange effect after transform.LookAt(...)
-		z += Time.deltaTime * rotationSpeed;
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, z);
+		// Because transform.Rotate(...) have a strange effect after transform.LookAt(...)
+		degrees += Time.deltaTime * rotationSpeed;
+        transform.rotation = Quaternion.Euler(degrees, degrees, degrees);
 	}
 
 	

@@ -454,6 +454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ed25c1279d045debebdbf8713ca756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabProjectile: {fileID: 114946916651936022, guid: ba17f6940e7464e16813bfd19c529265,
+  prefabProjectile: {fileID: 114408790998991508, guid: ba17f6940e7464e16813bfd19c529265,
     type: 2}
   target: {fileID: 988489042}
