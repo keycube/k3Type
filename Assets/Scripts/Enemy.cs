@@ -5,20 +5,23 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public float rotationSpeed;
-
+	public float movementSpeed;
 	private float degrees;
+	private Vector3 target;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+		transform.LookAt(target);
+		transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+
 		degrees += Time.deltaTime * rotationSpeed;
         transform.rotation = Quaternion.Euler(degrees, degrees, degrees);	
 	}
 
+	public void SetTarget(Vector3 target)
+	{
+		this.target = target;
+	}
 
 	void OnTriggerEnter(Collider other)
 	{

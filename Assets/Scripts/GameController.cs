@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour 
 {
-	public GameObject enemyPrefab;
+	public GameObject player;
+	public Enemy enemyPrefab;
 	public Vector3 spawnValues;
 	public int enemyCount;
 	public float spawnWait;
@@ -24,7 +25,8 @@ public class GameController : MonoBehaviour
 			for (int i = 0; i < enemyCount; i++)
 			{
 				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-				Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+				Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+				enemy.SetTarget(player.transform.position);
 				yield return new WaitForSeconds(spawnWait);
 			}
 			yield return new WaitForSeconds(waveWait);
