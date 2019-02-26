@@ -332,7 +332,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1389141364884190, guid: 885c6d250f3be4bfaa134b606c9d32f5,
     type: 2}
-  spawnValues: {x: 9, y: 0, z: 3.5}
+  spawnValues: {x: 8, y: 0, z: 3.5}
+  enemyCount: 3
+  spawnWait: 2
+  startWait: 1
+  waveWait: 20
 --- !u!4 &1063854613
 Transform:
   m_ObjectHideFlags: 0
