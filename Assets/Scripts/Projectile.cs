@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
 
 	public Transform target;
 
+	public GameObject explosion;
+
 	public float movementSpeed;
 
 	public float rotationSpeed;
@@ -34,5 +36,11 @@ public class Projectile : MonoBehaviour
 	public void SetTarget(Transform target) 
 	{
 		this.target = target;
+	}
+
+
+	void OnDestroy()
+	{
+		Instantiate(explosion, transform.position, Quaternion.identity);
 	}
 }
