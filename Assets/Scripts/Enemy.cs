@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+	public float rotationSpeed;
+
+	private float degrees;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,7 +15,8 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		degrees += Time.deltaTime * rotationSpeed;
+        transform.rotation = Quaternion.Euler(degrees, degrees, degrees);	
 	}
 
 
