@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	public float rotationSpeed;
+	public Transform cube;
+
 	public float movementSpeed;
-	private float degrees;
+
+	public float rotationSpeed;
+	
 	private Vector3 target;
 
 	void Update ()
 	{
-		transform.LookAt(target);
-		transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
-
-		degrees += Time.deltaTime * rotationSpeed;
-        transform.rotation = Quaternion.Euler(degrees, degrees, degrees);	
+		transform.Translate((target - transform.position).normalized * movementSpeed * Time.deltaTime);
+		
+		float rotation = rotationSpeed * Time.deltaTime;
+		cube.Rotate(rotation, rotation, rotation);
 	}
 
 	public void SetTarget(Vector3 target)
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour {
 		this.target = target;
 	}
 
-	void OnTriggerEnter(Collider other)
+	public void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Projectile")
 		{
