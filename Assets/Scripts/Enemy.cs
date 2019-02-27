@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour {
 
 	private string word;
 
+	private int rotationDirection;
+
 	void Update ()
 	{
 		transform.Translate((target - transform.position).normalized * movementSpeed * Time.deltaTime);
@@ -28,6 +30,8 @@ public class Enemy : MonoBehaviour {
 	public void Spawn(string word, Vector3 target)
 	{
 		gameObject.name = word;
+
+		rotationDirection = Random.Range(0, 2) * 2 - 1;
 		UpdateFromWord(word);
 
 		this.target = target;
@@ -40,7 +44,7 @@ public class Enemy : MonoBehaviour {
 		text.text = word;
 		cube.localScale = new Vector3(word.Length * 0.2f, word.Length * 0.2f, word.Length * 0.2f);
 		movementSpeed = 1.0f / Mathf.Sqrt(word.Length);
-		rotationSpeed = 1.0f / word.Length * 100f * (Random.Range(0,2)*2-1);
+		rotationSpeed = 1.0f / word.Length * 100f * rotationDirection;
 	}
 
 	public void OnTriggerEnter(Collider other)
