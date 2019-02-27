@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 	
 	public GameObject player;
 	public Enemy enemyPrefab;
+	public Projectile projectilePrefab;
 	public Vector3 spawnValues;
 	public int enemyCount;
 	public float spawnWait;
@@ -19,6 +20,18 @@ public class GameController : MonoBehaviour
 		StartCoroutine(SpawnWaves());
 	}
 
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.A))
+        {
+			if (transform.childCount > 0)
+			{
+				Projectile projectile = Instantiate(projectilePrefab, player.transform.position, Quaternion.identity);
+				projectile.SetTarget(transform.GetChild(0).transform.position);
+			}
+        }
+	}
+
 	IEnumerator SpawnWaves()
 	{
 		yield return new WaitForSeconds(startWait);
@@ -27,7 +40,7 @@ public class GameController : MonoBehaviour
 			for (int i = 0; i < enemyCount; i++)
 			{
 				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-				Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+				Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
 				enemy.Spawn(words[i], player.transform.position);
 				yield return new WaitForSeconds(spawnWait);
 			}

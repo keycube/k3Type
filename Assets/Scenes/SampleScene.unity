@@ -286,6 +286,8 @@ MonoBehaviour:
   player: {fileID: 1425899875}
   enemyPrefab: {fileID: 114737487397034086, guid: 885c6d250f3be4bfaa134b606c9d32f5,
     type: 2}
+  projectilePrefab: {fileID: 114408790998991508, guid: ba17f6940e7464e16813bfd19c529265,
+    type: 2}
   spawnValues: {x: 8, y: 0, z: 3.5}
   enemyCount: 15
   spawnWait: 2
@@ -419,4 +421,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 114408790998991508, guid: ba17f6940e7464e16813bfd19c529265,
     type: 2}
-  target: {fileID: 0}

@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour {
 
 	public void Spawn(string word, Vector3 target)
 	{
+		gameObject.name = word;
 		UpdateFromWord(word);
 
 		this.target = target;
