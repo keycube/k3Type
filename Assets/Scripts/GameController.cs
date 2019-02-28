@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour 
 {
-	private string[] words = { "a", "is", "the", "from", "hello", "typing", "glasgow", "keyboard", "computing", "technology", "interactive", "practitioner", "multicultural", "interconnected", "world", "key", "cube", "chi", "human", "community", "friendship", "researcher", "designer" };
+	private List<string> words;
 	
 	public PlayerController player;
 	public Enemy enemyPrefab;
@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
 
 	void Start () 
 	{
+		words = Utils.GetWords();
+		Utils.Shuffle(words);
+
 		StartCoroutine(SpawnWaves());
 		player.OnKeyPressed += PlayerController_OnKeyPressed;
 	}
@@ -34,6 +37,7 @@ public class GameController : MonoBehaviour
 				yield return new WaitForSeconds(spawnWait);
 			}
 			yield return new WaitForSeconds(waveWait);
+			Utils.Shuffle(words);
 		}
 	}
 
