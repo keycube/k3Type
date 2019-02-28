@@ -33,9 +33,10 @@ public class Projectile : MonoBehaviour
 	}
 
 	
-	public void SetTarget(Vector3 target) 
+	public void SetTarget(Vector3 target, string targetName) 
 	{
 		this.target = target;
+		gameObject.name = targetName;
 	}
 
 

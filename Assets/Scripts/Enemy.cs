@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour {
 
 	private string word;
 
+	private string originWord;
+
 	private int rotationDirection;
 
 	void Update ()
@@ -29,36 +31,59 @@ public class Enemy : MonoBehaviour {
 
 	public void Spawn(string word, Vector3 target)
 	{
+		originWord = word;
+		this.word = word;
 		gameObject.name = word;
+		text.text = word;
 
 		rotationDirection = Random.Range(0, 2) * 2 - 1;
-		UpdateFromWord(word);
-
+		UpdateFromWord(word.Length);
+		
 		this.target = target;
 	}
 
 
-	private void UpdateFromWord(string word) 
+	public void ReduceWord()
 	{
-		this.word = word;
-		text.text = word;
-		cube.localScale = new Vector3(word.Length * 0.2f, word.Length * 0.2f, word.Length * 0.2f);
-		movementSpeed = 1.0f / Mathf.Sqrt(word.Length);
-		rotationSpeed = 1.0f / word.Length * 100f * rotationDirection;
+		if (gameObject.name.Length <= 1)
+		{
+			gameObject.name = "";
+		}
+		else
+		{
+			gameObject.name = gameObject.name.Substring(1);
+		}
+		text.text = gameObject.name;
+	}
+
+	public string getOriginWord()
+	{
+		return originWord;
+	}
+
+	private void UpdateFromWord(int wordLength) 
+	{
+		cube.localScale = new Vector3(wordLength * 0.2f, wordLength * 0.2f, wordLength * 0.2f);
+		movementSpeed = 1.0f / Mathf.Sqrt(wordLength);
+		rotationSpeed = 1.0f / wordLength * 100f * rotationDirection;
 	}
 
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Projectile")
 		{
-			if (word.Length <= 1)
+			if (other.name == originWord) 
+			{
+				if (word.Length <= 1)
 			{
 				Destroy(gameObject);
-			} else 
+			} else
 			{
-				UpdateFromWord(word.Substring(1));
+				word = word.Substring(1);
+				UpdateFromWord(word.Length);
 			}
 			Destroy(other.gameObject);
+			}
 		}
 	}
 }
