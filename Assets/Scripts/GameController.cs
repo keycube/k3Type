@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
 
 	private void PlayerController_OnKeyPressed(string letter)
 	{
+		bool isLetterCorrect = false;
 		if (transform.childCount > 0)
 		{
 			foreach (Transform transformChild in transform)
@@ -51,15 +52,20 @@ public class GameController : MonoBehaviour
 				{
 					if (transformChild.gameObject.name[0] == letter.ToLower()[0])
 					{
-						Debug.Log(transformChild.gameObject.name);
 						Enemy enemy = transformChild.GetComponent<Enemy>();
 						Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
 						projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
 						enemy.ReduceWord();
+						isLetterCorrect = true;
 						break;
 					}
 				}
 			}
+		}
+
+		if (!isLetterCorrect)
+		{
+			Debug.Log("Incorrect Letter");
 		}
 	}
 }
