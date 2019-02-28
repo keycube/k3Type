@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
 
 		if (!isLetterCorrect)
 		{
-			Debug.Log("Incorrect Letter");
+			GetComponent<AudioSource>().Play();
 		}
 	}
 }
