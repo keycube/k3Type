@@ -6,8 +6,7 @@ public class GameController : MonoBehaviour
 {
 	private string[] words = { "a", "is", "the", "from", "hello", "typing", "glasgow", "keyboard", "computing", "technology", "interactive", "practitioner", "multicultural", "interconnected", "world", "key", "cube", "chi", "human", "community", "friendship", "researcher", "designer" };
 	
-	public PlayerController playerController;
-	public GameObject player;
+	public PlayerController player;
 	public Enemy enemyPrefab;
 	public Projectile projectilePrefab;
 	public Vector3 spawnValues;
@@ -19,7 +18,7 @@ public class GameController : MonoBehaviour
 	void Start () 
 	{
 		StartCoroutine(SpawnWaves());
-		playerController.OnKeyPressed += PlayerController_OnKeyPressed;
+		player.OnKeyPressed += PlayerController_OnKeyPressed;
 	}
 
 	IEnumerator SpawnWaves()
@@ -31,7 +30,7 @@ public class GameController : MonoBehaviour
 			{
 				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
-				enemy.Spawn(words[i], player.transform.position);
+				enemy.Spawn(words[i], player.gameObject.transform.position);
 				yield return new WaitForSeconds(spawnWait);
 			}
 			yield return new WaitForSeconds(waveWait);
@@ -50,7 +49,7 @@ public class GameController : MonoBehaviour
 					{
 						Debug.Log(transformChild.gameObject.name);
 						Enemy enemy = transformChild.GetComponent<Enemy>();
-						Projectile projectile = Instantiate(projectilePrefab, player.transform.position, Quaternion.identity);
+						Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
 						projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
 						enemy.ReduceWord();
 						break;
