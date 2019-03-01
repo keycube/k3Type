@@ -16,8 +16,8 @@ public class GameController : MonoBehaviour
 	public float waveWait;
 
 	private Color colorFocus = new Color(0.95f, 0.7f, 0.75f);
-
 	public Transform enemyFocus;
+	private int enemies;
 
 	void Start () 
 	{
@@ -30,18 +30,18 @@ public class GameController : MonoBehaviour
 
 	IEnumerator SpawnWaves()
 	{
-		yield return new WaitForSeconds(startWait);
-		while(true)
+		Utils.Shuffle(words);
+
+		enemies = 0;
+		yield return new WaitForSeconds(waveWait);
+		
+		for (int i = 0; i < enemyCount; i++)
 		{
-			for (int i = 0; i < enemyCount; i++)
-			{
-				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-				Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
-				enemy.Spawn(words[i], player.gameObject.transform.position);
-				yield return new WaitForSeconds(spawnWait);
-			}
-			yield return new WaitForSeconds(waveWait);
-			Utils.Shuffle(words);
+			Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+			Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
+			enemy.Spawn(words[i].ToLower(), player.gameObject.transform.position);
+			enemies += 1;
+			yield return new WaitForSeconds(spawnWait);
 		}
 	}
 
@@ -59,8 +59,13 @@ public class GameController : MonoBehaviour
 					Enemy enemy = enemyFocus.GetComponent<Enemy>();
 					Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
 					projectile.SetTarget(enemyFocus.transform.position, enemy.getOriginWord());
-					enemy.ReduceWord();
 					isLetterCorrect = true;
+					if (enemy.ReduceWord()) 
+					{	
+						enemies -= 1;
+						if (enemies <= 0)
+							StartCoroutine(SpawnWaves());
+					}
 				}
 			}
 		}

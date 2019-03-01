@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 
-	public void ReduceWord()
+	public bool ReduceWord()
 	{
 		if (gameObject.name.Length <= 1)
 		{
@@ -54,6 +54,8 @@ public class Enemy : MonoBehaviour {
 			gameObject.name = gameObject.name.Substring(1);
 		}
 		text.text = gameObject.name;
+		
+		return gameObject.name == "";
 	}
 
 	public string getOriginWord()

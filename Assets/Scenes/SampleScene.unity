@@ -291,9 +291,9 @@ MonoBehaviour:
     type: 2}
   spawnValues: {x: 8, y: 0, z: 3.5}
   enemyCount: 15
-  spawnWait: 2
+  spawnWait: 1
   startWait: 1
-  waveWait: 20
+  waveWait: 5
   enemyFocus: {fileID: 0}
 --- !u!4 &1063854613
 Transform:
