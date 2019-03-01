@@ -294,6 +294,7 @@ MonoBehaviour:
   spawnWait: 2
   startWait: 1
   waveWait: 20
+  enemyFocus: {fileID: 0}
 --- !u!4 &1063854613
 Transform:
   m_ObjectHideFlags: 0

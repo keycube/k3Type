@@ -15,6 +15,10 @@ public class GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 
+	private Color colorFocus = new Color(0.95f, 0.7f, 0.75f);
+
+	public Transform enemyFocus;
+
 	void Start () 
 	{
 		words = Utils.GetWords();
@@ -44,21 +48,44 @@ public class GameController : MonoBehaviour
 	private void PlayerController_OnKeyPressed(string letter)
 	{
 		bool isLetterCorrect = false;
-		if (transform.childCount > 0)
+
+		if (enemyFocus != null && enemyFocus.name != "")
 		{
-			foreach (Transform transformChild in transform)
+			if (enemyFocus.gameObject.name.Length > 0)
 			{
-				if (transformChild.gameObject.name.Length > 0)
+				if (enemyFocus.gameObject.name[0] == letter.ToLower()[0])
 				{
-					if (transformChild.gameObject.name[0] == letter.ToLower()[0])
+					player.gameObject.transform.LookAt(enemyFocus.transform.position);
+					Enemy enemy = enemyFocus.GetComponent<Enemy>();
+					Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
+					projectile.SetTarget(enemyFocus.transform.position, enemy.getOriginWord());
+					enemy.ReduceWord();
+					isLetterCorrect = true;
+				}
+			}
+		}
+		else
+		{
+			if (transform.childCount > 0)
+			{
+				foreach (Transform transformChild in transform)
+				{
+					if (transformChild.gameObject.name.Length > 0)
 					{
-						player.gameObject.transform.LookAt(transformChild.transform.position);
-						Enemy enemy = transformChild.GetComponent<Enemy>();
-						Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
-						projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
-						enemy.ReduceWord();
-						isLetterCorrect = true;
-						break;
+						if (transformChild.gameObject.name[0] == letter.ToLower()[0])
+						{
+							player.gameObject.transform.LookAt(transformChild.transform.position);
+							Enemy enemy = transformChild.GetComponent<Enemy>();
+							Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
+							projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
+							enemy.ReduceWord();
+							isLetterCorrect = true;
+
+							enemyFocus = transformChild;
+							enemy.text.faceColor = colorFocus;
+														
+							break;
+						}
 					}
 				}
 			}
