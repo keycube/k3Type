@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour
 				{
 					if (transformChild.gameObject.name[0] == letter.ToLower()[0])
 					{
+						player.gameObject.transform.LookAt(transformChild.transform.position);
 						Enemy enemy = transformChild.GetComponent<Enemy>();
 						Projectile projectile = Instantiate(projectilePrefab, player.gameObject.transform.position, Quaternion.identity);
 						projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
