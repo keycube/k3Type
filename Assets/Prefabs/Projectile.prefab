@@ -206,5 +206,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   explosion: {fileID: 1827597066228242, guid: ad39960569c33415b914cd813a323964, type: 2}
-  movementSpeed: 12
+  movementSpeed: 8
   rotationSpeed: 500
