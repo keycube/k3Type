@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour {
 	private string originWord;
 
 	private int rotationDirection;
+	public float slowTiming;
 
 	void Update ()
 	{
@@ -77,15 +78,26 @@ public class Enemy : MonoBehaviour {
 			if (other.name == originWord) 
 			{
 				if (word.Length <= 1)
-			{
-				Destroy(gameObject);
-			} else
-			{
-				word = word.Substring(1);
-				UpdateFromWord(word.Length);
-			}
-			Destroy(other.gameObject);
+				{
+					Destroy(gameObject);
+				} 
+				else
+				{
+					word = word.Substring(1);
+					UpdateFromWord(word.Length);
+					StartCoroutine(slowForXSecond(slowTiming));
+				}
+				Destroy(other.gameObject);
 			}
 		}
+	}
+
+	IEnumerator slowForXSecond(float time)
+	{
+		float temp = movementSpeed;
+		movementSpeed *= 0.25f;
+		yield return new WaitForSeconds(time);
+		movementSpeed = temp;
+		yield return null;
 	}
 }

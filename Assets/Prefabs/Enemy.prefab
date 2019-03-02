@@ -330,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cube: {fileID: 4642890562046880}
   text: {fileID: 114136402536760902}
+  slowTiming: 1
 --- !u!222 &222415137100625202
 CanvasRenderer:
   m_ObjectHideFlags: 1
