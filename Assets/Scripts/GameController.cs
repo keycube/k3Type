@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 	{
 		Utils.Shuffle(words);
 
+		enemyCount += 2;
+
 		enemies = 0;
 		yield return new WaitForSeconds(waveWait);
 		
