@@ -102,5 +102,7 @@ public class GameController : MonoBehaviour
 		{
 			GetComponent<AudioSource>().Play();
 		}
+
+		player.updateAccuary(isLetterCorrect);
 	}
 }
