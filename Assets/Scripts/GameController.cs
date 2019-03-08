@@ -68,6 +68,8 @@ public class GameController : MonoBehaviour
 						if (enemies <= 0)
 							StartCoroutine(SpawnWaves());
 					}
+
+					player.UpdateSpeed();
 				}
 			}
 		}
@@ -90,6 +92,8 @@ public class GameController : MonoBehaviour
 
 							enemyFocus = transformChild;
 							enemy.text.faceColor = colorFocus;
+
+							player.StartWord();
 														
 							break;
 						}
