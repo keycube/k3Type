@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
 
 	public GameObject explosion;
 
+	[Range(1f, 20f)]
 	public float movementSpeed;
 
 	public float rotationSpeed;
