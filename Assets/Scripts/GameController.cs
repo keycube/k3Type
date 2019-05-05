@@ -25,7 +25,9 @@ public class GameController : MonoBehaviour
 		Utils.Shuffle(words);
 
 		StartCoroutine(SpawnWaves());
-		player[0].OnKeyPressed += PlayerController_OnKeyPressed;
+		player[0].OnKeyPressed += PlayerController_OnKeyPressedZero;
+		player[1].OnKeyPressed += PlayerController_OnKeyPressedOne;
+		player[2].OnKeyPressed += PlayerController_OnKeyPressedTwo;
 	}
 
 	IEnumerator SpawnWaves()
@@ -53,7 +55,22 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	private void PlayerController_OnKeyPressed(string letter)
+	private void PlayerController_OnKeyPressedZero(string letter)
+	{
+		PlayerOnKeyPressed(0, letter);
+	}
+
+	private void PlayerController_OnKeyPressedOne(string letter)
+	{
+		PlayerOnKeyPressed(1, letter);
+	}
+
+	private void PlayerController_OnKeyPressedTwo(string letter)
+	{
+		PlayerOnKeyPressed(2, letter);
+	}
+
+	private void PlayerOnKeyPressed(int playerNumber, string letter)
 	{
 		bool isLetterCorrect = false;
 
@@ -63,9 +80,9 @@ public class GameController : MonoBehaviour
 			{
 				if (enemyFocus.gameObject.name[0] == letter.ToLower()[0])
 				{
-					player[0].gameObject.transform.LookAt(enemyFocus.transform.position);
+					player[playerNumber].gameObject.transform.LookAt(enemyFocus.transform.position);
 					Enemy enemy = enemyFocus.GetComponent<Enemy>();
-					Projectile projectile = Instantiate(projectilePrefab, player[0].gameObject.transform.position, Quaternion.identity);
+					Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);
 					projectile.SetTarget(enemyFocus.transform, enemy.getOriginWord());
 					isLetterCorrect = true;
 					if (enemy.ReduceWord()) 
@@ -75,7 +92,7 @@ public class GameController : MonoBehaviour
 							StartCoroutine(SpawnWaves());
 					}
 
-					player[0].UpdateSpeed();
+					player[playerNumber].UpdateSpeed();
 				}
 			}
 		}
@@ -89,9 +106,9 @@ public class GameController : MonoBehaviour
 					{
 						if (transformChild.gameObject.name[0] == letter.ToLower()[0])
 						{
-							player[0].gameObject.transform.LookAt(transformChild.transform.position);
+							player[playerNumber].gameObject.transform.LookAt(transformChild.transform.position);
 							Enemy enemy = transformChild.GetComponent<Enemy>();
-							Projectile projectile = Instantiate(projectilePrefab, player[0].gameObject.transform.position, Quaternion.identity);
+							Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);
 							projectile.SetTarget(transformChild.transform, enemy.getOriginWord());
 							enemy.ReduceWord();
 							isLetterCorrect = true;
@@ -99,7 +116,7 @@ public class GameController : MonoBehaviour
 							enemyFocus = transformChild;
 							enemy.text.faceColor = colorFocus;
 
-							player[0].StartWord();
+							player[playerNumber].StartWord();
 														
 							break;
 						}
@@ -113,6 +130,6 @@ public class GameController : MonoBehaviour
 			GetComponent<AudioSource>().Play();
 		}
 
-		player[0].updateAccuary(isLetterCorrect);
+		player[playerNumber].updateAccuary(isLetterCorrect);
 	}
 }
