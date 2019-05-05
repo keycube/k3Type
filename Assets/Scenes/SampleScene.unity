@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAccury: {fileID: 2107914119}
   textSpeed: {fileID: 1399330936}
-  port: /dev/cu.wchusbserial14230
+  port: /dev/cu.wchusbserial14240
   baudrate: 9600
 --- !u!54 &200285121
 Rigidbody:
@@ -601,7 +601,7 @@ Transform:
   - {fileID: 2107914118}
   - {fileID: 1399330935}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722261988
 GameObject:
@@ -1030,9 +1030,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
+  - {fileID: 200285120}
   - {fileID: 1425899881}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1215678812}
   enemyPrefab: {fileID: 114737487397034086, guid: 885c6d250f3be4bfaa134b606c9d32f5,
     type: 2}
   projectilePrefab: {fileID: 114408790998991508, guid: ba17f6940e7464e16813bfd19c529265,
@@ -1054,7 +1054,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1063854614
 AudioSource:
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAccury: {fileID: 1622541818}
   textSpeed: {fileID: 661152244}
-  port: /dev/cu.wchusbserial14240
+  port: /dev/cu.wchusbserial14230
   baudrate: 9600
 --- !u!1 &1609638750
 GameObject:
@@ -1613,7 +1613,7 @@ Transform:
   - {fileID: 1622541817}
   - {fileID: 661152243}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1622541816
 GameObject:
@@ -1843,7 +1843,7 @@ Transform:
   - {fileID: 722261989}
   - {fileID: 912253707}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874111348
 GameObject:
@@ -1883,7 +1883,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107914117
 GameObject:

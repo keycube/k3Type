@@ -37,12 +37,18 @@ public class GameController : MonoBehaviour
 		enemies = 0;
 		yield return new WaitForSeconds(waveWait);
 		
+		int pR = 0;
 		for (int i = 0; i < enemyCount; i++)
 		{
 			Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 			Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
-			enemy.Spawn(words[i].ToLower(), player[0].gameObject.transform.position);
+			enemy.Spawn(words[i].ToLower(), player[pR].gameObject.transform.position);
 			enemies += 1;
+			pR += 1;
+			if (pR > 2)
+			{
+				pR = 0;
+			}				
 			yield return new WaitForSeconds(spawnWait);
 		}
 	}
@@ -60,7 +66,7 @@ public class GameController : MonoBehaviour
 					player[0].gameObject.transform.LookAt(enemyFocus.transform.position);
 					Enemy enemy = enemyFocus.GetComponent<Enemy>();
 					Projectile projectile = Instantiate(projectilePrefab, player[0].gameObject.transform.position, Quaternion.identity);
-					projectile.SetTarget(enemyFocus.transform.position, enemy.getOriginWord());
+					projectile.SetTarget(enemyFocus.transform, enemy.getOriginWord());
 					isLetterCorrect = true;
 					if (enemy.ReduceWord()) 
 					{	
@@ -86,7 +92,7 @@ public class GameController : MonoBehaviour
 							player[0].gameObject.transform.LookAt(transformChild.transform.position);
 							Enemy enemy = transformChild.GetComponent<Enemy>();
 							Projectile projectile = Instantiate(projectilePrefab, player[0].gameObject.transform.position, Quaternion.identity);
-							projectile.SetTarget(transformChild.transform.position, enemy.getOriginWord());
+							projectile.SetTarget(transformChild.transform, enemy.getOriginWord());
 							enemy.ReduceWord();
 							isLetterCorrect = true;
 

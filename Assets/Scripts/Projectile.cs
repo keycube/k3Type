@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour 
 {
 
-	public Vector3 target;
+	public Transform target;
 
 	public GameObject explosion;
 
@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
 	}
 
 	
-	public void SetTarget(Vector3 target, string targetName) 
+	public void SetTarget(Transform target, string targetName) 
 	{
 		this.target = target;
 		gameObject.name = targetName;
