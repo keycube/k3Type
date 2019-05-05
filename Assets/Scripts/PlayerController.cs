@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private bool _continue = false;
 	Dictionary<string, bool> keyState = new Dictionary<string, bool>();
 
+	public Transform enemyFocus;
+	public Color colorFocus;
+
     void Start()
     {
 		InitKeyState();

@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 
-	private Color colorFocus = new Color(0.95f, 0.7f, 0.75f);
 	public Transform enemyFocus;
 	private int enemies;
 
@@ -50,7 +49,7 @@ public class GameController : MonoBehaviour
 			if (pR > 2)
 			{
 				pR = 0;
-			}				
+			}			
 			yield return new WaitForSeconds(spawnWait);
 		}
 	}
@@ -74,18 +73,18 @@ public class GameController : MonoBehaviour
 	{
 		bool isLetterCorrect = false;
 
-		if (enemyFocus != null && enemyFocus.name != "")
+		if (player[playerNumber].enemyFocus != null && player[playerNumber].enemyFocus.name != "")
 		{
-			if (enemyFocus.gameObject.name.Length > 0)
+			if (player[playerNumber].enemyFocus.gameObject.name.Length > 0)
 			{
-				if (enemyFocus.gameObject.name[0] == letter.ToLower()[0])
+				if (player[playerNumber].enemyFocus.gameObject.name[0] == letter.ToLower()[0])
 				{
-					player[playerNumber].gameObject.transform.LookAt(enemyFocus.transform.position);
-					Enemy enemy = enemyFocus.GetComponent<Enemy>();
+					player[playerNumber].gameObject.transform.LookAt(player[playerNumber].enemyFocus.transform.position);
+					Enemy enemy = player[playerNumber].enemyFocus.GetComponent<Enemy>();
 					Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);
-					projectile.SetTarget(enemyFocus.transform, enemy.getOriginWord());
+					projectile.SetTarget(player[playerNumber].enemyFocus.transform, enemy.getOriginWord());
 					isLetterCorrect = true;
-					if (enemy.ReduceWord()) 
+					if (enemy.ReduceWord())
 					{	
 						enemies -= 1;
 						if (enemies <= 0)
@@ -113,8 +112,8 @@ public class GameController : MonoBehaviour
 							enemy.ReduceWord();
 							isLetterCorrect = true;
 
-							enemyFocus = transformChild;
-							enemy.text.faceColor = colorFocus;
+							player[playerNumber].enemyFocus = transformChild;
+							enemy.text.faceColor = player[playerNumber].colorFocus;
 
 							player[playerNumber].StartWord();
 														
