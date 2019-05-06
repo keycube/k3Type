@@ -18,28 +18,11 @@ public class GameController : MonoBehaviour
 
 	private int enemies;
 
-	public Text textWordsTyped;
-	public Text textKeysPressed;
-	public Text textCubeGenerated;
-	public Text textBestWPM;
+	public StatsController statsController;
 
-	private int wordsTyped;
-	private int keysPressed;
-	private int cubeGenerated;
-	private float bestWPM;
-
+	
 	void Start () 
 	{
-		wordsTyped = 0;
-		keysPressed = 0;
-		cubeGenerated = 0;
-		bestWPM = 0.0f;
-
-		textWordsTyped.text = wordsTyped.ToString();
-		textKeysPressed.text = keysPressed.ToString();
-		textCubeGenerated.text = cubeGenerated.ToString();
-		textBestWPM.text = bestWPM.ToString("F2");
-
 		words = Utils.GetWords();
 		Utils.Shuffle(words);
 
@@ -48,6 +31,7 @@ public class GameController : MonoBehaviour
 		player[1].OnKeyPressed += PlayerController_OnKeyPressedOne;
 		player[2].OnKeyPressed += PlayerController_OnKeyPressedTwo;
 	}
+
 
 	IEnumerator SpawnWaves()
 	{
@@ -63,6 +47,7 @@ public class GameController : MonoBehaviour
 		{
 			Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 			Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
+			statsController.UpdateCubesGenerated(1);
 			enemy.Spawn(words[i].ToLower(), player[pR].gameObject.transform.position);
 			enemies += 1;
 			pR += 1;
@@ -91,6 +76,8 @@ public class GameController : MonoBehaviour
 
 	private void PlayerOnKeyPressed(int playerNumber, string letter)
 	{
+		statsController.UpdateKeysPressed(1);
+
 		bool isLetterCorrect = false;
 
 		if (player[playerNumber].enemyFocus != null && player[playerNumber].enemyFocus.name != "")
@@ -102,13 +89,19 @@ public class GameController : MonoBehaviour
 					player[playerNumber].gameObject.transform.LookAt(player[playerNumber].enemyFocus.transform.position);
 					Enemy enemy = player[playerNumber].enemyFocus.GetComponent<Enemy>();
 					Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);
+					statsController.UpdateCubesGenerated(1);
 					projectile.SetTarget(player[playerNumber].enemyFocus.transform, enemy.getOriginWord());
+					projectile.SetStatController(statsController);
 					isLetterCorrect = true;
 					if (enemy.ReduceWord())
 					{
+						statsController.UpdateWordsTyped(1);
 						enemies -= 1;
 						if (enemies <= 0)
+						{
+							statsController.Save();
 							StartCoroutine(SpawnWaves());
+						}							
 					}
 
 					player[playerNumber].UpdateSpeed();
@@ -128,7 +121,9 @@ public class GameController : MonoBehaviour
 							player[playerNumber].gameObject.transform.LookAt(transformChild.transform.position);
 							Enemy enemy = transformChild.GetComponent<Enemy>();
 							Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);
+							statsController.UpdateCubesGenerated(1);
 							projectile.SetTarget(transformChild.transform, enemy.getOriginWord());
+							projectile.SetStatController(statsController);
 							enemy.ReduceWord();
 							isLetterCorrect = true;
 

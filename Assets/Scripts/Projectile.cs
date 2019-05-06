@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
 	public float rotationSpeed;
 
 	private float degrees;
+	
+	private StatsController statsController;
 
 	// Use this for initialization
 	void Start () 
@@ -40,9 +42,16 @@ public class Projectile : MonoBehaviour
 		gameObject.name = targetName;
 	}
 
+	
+	public void SetStatController(StatsController sc)
+	{
+		statsController = sc;
+	}
 
 	void OnDestroy()
 	{
+		if (statsController != null)
+			statsController.UpdateCubesGenerated(9);
 		Instantiate(explosion, transform.position, Quaternion.identity);
 	}
 }
