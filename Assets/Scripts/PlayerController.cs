@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
         textAccury.text = keyPressAccuracy.ToString("F2") + "%";
 
         if (timeTotal != 0f)
-            textSpeed.text = (keyPressSuccessCount / timeTotal * 12f).ToString("F2") + " wpm"; // * 12 = * 60 / 5 (cps to wpm)
+            textSpeed.text = (keyPressSuccessCount / timeTotal * 12f).ToString("F2") + " awpm"; // * 12 = * 60 / 5 (cps to wpm)
     }
 
     public void UpdateSpeed()
