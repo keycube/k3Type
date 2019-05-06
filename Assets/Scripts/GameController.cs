@@ -21,11 +21,19 @@ public class GameController : MonoBehaviour
 	public StatsController statsController;
 	public LogsController logsController;
 
+	private int waiveNumber;
+	public Text textWaive;
+	public bool waiveSuccess;
+	private float waiveEnemySpeed;
+
 	
 	void Start () 
 	{
 		words = Utils.GetWords();
 		Utils.Shuffle(words);
+
+		waiveSuccess = true;
+		waiveNumber = 0;		
 
 		StartCoroutine(SpawnWaves());
 		player[0].OnKeyPressed += PlayerController_OnKeyPressedZero;
@@ -35,12 +43,32 @@ public class GameController : MonoBehaviour
 		logsController.Append("First Test");
 	}
 
+	public void Lose() 
+	{
+		enemies -= 1;
+		waiveSuccess = false;
+		textWaive.text = "X (" + waiveNumber.ToString() + ")" ;
+	}
 
 	IEnumerator SpawnWaves()
 	{
+		Debug.Log("TestSpawnWaves");
+
+		if (waiveSuccess) {
+			waiveNumber += 1;
+		} else {
+			waiveSuccess = true;
+			waiveNumber = 1;
+			enemyCount = 2;
+			waiveEnemySpeed = 0f;
+		}
+
+		textWaive.text = waiveNumber.ToString();
+		
 		Utils.Shuffle(words);
 
-		enemyCount += 2;
+		enemyCount += 1;
+		waiveEnemySpeed += 0.05f;
 
 		enemies = 0;
 		yield return new WaitForSeconds(waveWait);
@@ -51,13 +79,13 @@ public class GameController : MonoBehaviour
 			Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 			Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
 			statsController.UpdateCubesGenerated(1);
-			enemy.Spawn(words[i].ToLower(), player[pR].gameObject.transform.position);
+			enemy.Spawn(words[i].ToLower(), player[pR].gameObject.transform.position, waiveEnemySpeed);
 			enemies += 1;
 			pR += 1;
 			if (pR > 2)
 			{
 				pR = 0;
-			}			
+			}
 			yield return new WaitForSeconds(spawnWait);
 		}
 	}
@@ -106,6 +134,7 @@ public class GameController : MonoBehaviour
 					{
 						statsController.UpdateWordsTyped(1);
 						enemies -= 1;
+						Debug.Log("enemies = " + enemies.ToString());
 						if (enemies <= 0)
 						{
 							statsController.Save();

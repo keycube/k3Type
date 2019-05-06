@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour {
 
 	public TextMeshPro text;
 
+	public float movementSpeedCustom = 0.5f;
+
 	private float movementSpeed;
 
 	private float rotationSpeed;
@@ -32,12 +34,14 @@ public class Enemy : MonoBehaviour {
 		cube.Rotate(rotation, rotation, rotation);
 	}
 
-	public void Spawn(string word, Vector3 target)
+	public void Spawn(string word, Vector3 target, float speedIncrease)
 	{
 		originWord = word;
 		this.word = word;
 		gameObject.name = word;
 		text.text = word;
+
+		movementSpeedCustom += speedIncrease;
 
 		rotationDirection = Random.Range(0, 2) * 2 - 1;
 		UpdateFromWord(word.Length);
@@ -69,7 +73,7 @@ public class Enemy : MonoBehaviour {
 	private void UpdateFromWord(int wordLength) 
 	{
 		cube.localScale = new Vector3(wordLength * 0.2f, wordLength * 0.2f, wordLength * 0.2f);
-		movementSpeed = 1.0f / Mathf.Sqrt(wordLength);
+		movementSpeed = (1.0f / Mathf.Sqrt(wordLength)) * movementSpeedCustom;
 		rotationSpeed = 1.0f / wordLength * 100f * rotationDirection;
 	}
 
@@ -94,9 +98,10 @@ public class Enemy : MonoBehaviour {
 		}
 		if (other.tag == "Player")
 		{
+			GameController gc = transform.GetComponentInParent<GameController>();
+			gc.Lose();
 			if (transform.parent.transform.childCount <= 1)
 			{
-				GameController gc = transform.GetComponentInParent<GameController>();
 				gc.StartSpawn();
 			}
 			PlayerController pc = other.gameObject.GetComponent<PlayerController>();
