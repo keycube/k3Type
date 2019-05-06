@@ -16,7 +16,7 @@ public class StatsController : MonoBehaviour {
 	//private float bestWPM;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		wordsTyped = PlayerPrefs.GetInt("wordsTyped", 0);
 		keysPressed = PlayerPrefs.GetInt("keysPressed", 0);

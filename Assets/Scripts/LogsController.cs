@@ -26,9 +26,9 @@ public class LogsController : MonoBehaviour {
 		System.IO.File.AppendAllText(pathFileName, string.Format("{0},{1}\n", DateTime.Now.ToString("HH:mm:ss.fff"), data));
 	}
 
-	public void AddKeyPress(int playerNumber, string keyCode) 
+	public void AddKeyPress(int playerNumber, string keyCode, int state) 
 	{
-		Append(string.Format("{1},{2}", playerNumber, keyCode));
+		Append(string.Format("{1},{2},{3}", playerNumber, keyCode, state));
 	}
 	
 	public void StartWord(int playerNumber, string keyCode) 

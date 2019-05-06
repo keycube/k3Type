@@ -381,6 +381,7 @@ MonoBehaviour:
   colorFocus: {r: 0.4906105, g: 0.768168, b: 0.990566, a: 1}
   playerNumber: 0
   statsController: {fileID: 590759218}
+  logsController: {fileID: 662238914}
 --- !u!54 &200285121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1957,6 +1958,7 @@ MonoBehaviour:
   colorFocus: {r: 0.95, g: 0.7, b: 0.75, a: 1}
   playerNumber: 2
   statsController: {fileID: 590759218}
+  logsController: {fileID: 662238914}
 --- !u!54 &1215678813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2498,6 +2500,7 @@ MonoBehaviour:
   colorFocus: {r: 0.98039216, g: 0.8597871, b: 0.41176465, a: 1}
   playerNumber: 1
   statsController: {fileID: 590759218}
+  logsController: {fileID: 662238914}
 --- !u!1 &1609638750
 GameObject:
   m_ObjectHideFlags: 0

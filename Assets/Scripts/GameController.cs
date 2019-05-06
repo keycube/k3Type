@@ -40,11 +40,31 @@ public class GameController : MonoBehaviour
 		player[1].OnKeyPressed += PlayerController_OnKeyPressedOne;
 		player[2].OnKeyPressed += PlayerController_OnKeyPressedTwo;
 
-		logsController.Append("First Test");
+		logsController.Append("startGame");
 	}
+
+	void Update()
+    {
+        if (Input.GetKeyDown(("a")))
+        {
+			Debug.Log("newPlayer0");
+			logsController.Append("newPlayer,0");
+        }
+		if (Input.GetKeyDown(("t")))
+        {
+			Debug.Log("newPlayer1");
+			logsController.Append("newPlayer,1");
+        }
+		if (Input.GetKeyDown(("p")))
+        {
+			Debug.Log("newPlayer2");
+			logsController.Append("newPlayer,2");
+        }
+    }
 
 	public void Lose() 
 	{
+		logsController.Append("loseWaive," + waiveNumber.ToString());
 		enemies -= 1;
 		waiveSuccess = false;
 		textWaive.text = "X (" + waiveNumber.ToString() + ")" ;
@@ -62,6 +82,8 @@ public class GameController : MonoBehaviour
 			enemyCount = 2;
 			waiveEnemySpeed = 0f;
 		}
+
+		logsController.Append("spawnWaves," + waiveNumber.ToString());
 
 		textWaive.text = waiveNumber.ToString();
 		
@@ -156,6 +178,7 @@ public class GameController : MonoBehaviour
 					{
 						if (transformChild.gameObject.name[0] == letter.ToLower()[0])
 						{
+							logsController.Append(playerNumber.ToString() + ",newWord," + transformChild.gameObject.name);
 							player[playerNumber].gameObject.transform.LookAt(transformChild.transform.position);
 							Enemy enemy = transformChild.GetComponent<Enemy>();
 							Projectile projectile = Instantiate(projectilePrefab, player[playerNumber].gameObject.transform.position, Quaternion.identity);

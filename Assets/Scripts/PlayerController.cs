@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
 	public StatsController statsController;
 
+    public LogsController logsController;
+
     void Start()
     {
 		InitKeyState();
@@ -202,9 +204,14 @@ public class PlayerController : MonoBehaviour
 		if (keyState[code] == true) // if true it means we just release the key, therefore nothing to do
 		{
 			Debug.Log("Release Key");
+            //logsController.AddKeyPress(playerNumber, code, 0);
+            logsController.Append(playerNumber.ToString() + "," + code + ",0");
 			keyState[code] = false;
 			return "";
 		}
+
+        //logsController.AddKeyPress(playerNumber, code, 1);
+        logsController.Append(playerNumber.ToString() + "," + code + ",1");
 
 		keyState[code] = true;
         switch (code)
@@ -287,6 +294,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        /* 
         for (int i = a; i <= z; i++)
         {
             if (Input.GetKeyDown((KeyCode)i))
@@ -297,6 +305,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public void updateAccuary(bool b)
