@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour 
 {
@@ -15,11 +16,30 @@ public class GameController : MonoBehaviour
 	public float startWait;
 	public float waveWait;
 
-	public Transform enemyFocus;
 	private int enemies;
+
+	public Text textWordsTyped;
+	public Text textKeysPressed;
+	public Text textCubeGenerated;
+	public Text textBestWPM;
+
+	private int wordsTyped;
+	private int keysPressed;
+	private int cubeGenerated;
+	private float bestWPM;
 
 	void Start () 
 	{
+		wordsTyped = 0;
+		keysPressed = 0;
+		cubeGenerated = 0;
+		bestWPM = 0.0f;
+
+		textWordsTyped.text = wordsTyped.ToString();
+		textKeysPressed.text = keysPressed.ToString();
+		textCubeGenerated.text = cubeGenerated.ToString();
+		textBestWPM.text = bestWPM.ToString("F2");
+
 		words = Utils.GetWords();
 		Utils.Shuffle(words);
 
@@ -85,7 +105,7 @@ public class GameController : MonoBehaviour
 					projectile.SetTarget(player[playerNumber].enemyFocus.transform, enemy.getOriginWord());
 					isLetterCorrect = true;
 					if (enemy.ReduceWord())
-					{	
+					{
 						enemies -= 1;
 						if (enemies <= 0)
 							StartCoroutine(SpawnWaves());
