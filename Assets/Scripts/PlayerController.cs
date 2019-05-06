@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
 	public int playerNumber;
 
+	public StatsController statsController;
+
     void Start()
     {
 		InitKeyState();
@@ -174,6 +176,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ThisWillBeExecutedOnTheMainThread(string message)
     {
+		Debug.Log(message);
 		String s = ConvertKeycubeToLetter(message);
 		if (s != "")
 		{
@@ -320,4 +323,27 @@ public class PlayerController : MonoBehaviour
     {
         timeTemp = Time.time;
     }
+
+	public void ResetStat()
+	{
+		keyPressCount = 0f;
+		keyPressSuccessCount = 0f;
+		keyPressAccuracy = 0f;
+		textAccury.text = "- %";
+
+		timeTotal = 0f;
+		textSpeed.text = "- awpm";
+
+		statsController.UpdateCubesGenerated(19);
+		statsController.Save();
+
+		WriteToArduino("1");
+		StartCoroutine(StopVibrationAfterTime(1f));
+	}
+
+	IEnumerator StopVibrationAfterTime(float time)
+ 	{
+    	yield return new WaitForSeconds(time);
+     	WriteToArduino("0");
+ 	}
 }

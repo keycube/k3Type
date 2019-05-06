@@ -331,6 +331,8 @@ MonoBehaviour:
   cube: {fileID: 4642890562046880}
   text: {fileID: 114136402536760902}
   slowTiming: 1
+  explosionPrefab: {fileID: 1827597066228242, guid: 8a54ec7cb70524106a08a851b706fce3,
+    type: 2}
 --- !u!222 &222415137100625202
 CanvasRenderer:
   m_ObjectHideFlags: 1

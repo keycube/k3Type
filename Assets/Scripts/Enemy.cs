@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour {
 	private int rotationDirection;
 	public float slowTiming;
 
+	public GameObject explosionPrefab;
+
 	void Update ()
 	{
 		transform.Translate((target - transform.position).normalized * movementSpeed * Time.deltaTime);
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour {
 				if (word.Length <= 1)
 				{
 					Destroy(gameObject);
-				} 
+				}
 				else
 				{
 					word = word.Substring(1);
@@ -95,8 +97,12 @@ public class Enemy : MonoBehaviour {
 			if (transform.parent.transform.childCount <= 1)
 			{
 				GameController gc = transform.GetComponentInParent<GameController>();
-				gc.StartSpawn(); 
+				gc.StartSpawn();
 			}
+			PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+			pc.ResetStat();
+
+			Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 		}
 	}

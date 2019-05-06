@@ -375,11 +375,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAccury: {fileID: 2107914119}
   textSpeed: {fileID: 1399330936}
-  port: /dev/cu.wchusbserial14240
+  port: /dev/cu.wchusbserial14140
   baudrate: 9600
   enemyFocus: {fileID: 0}
   colorFocus: {r: 0.4906105, g: 0.768168, b: 0.990566, a: 1}
   playerNumber: 0
+  statsController: {fileID: 590759218}
 --- !u!54 &200285121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1949,11 +1950,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAccury: {fileID: 722261990}
   textSpeed: {fileID: 912253708}
-  port: /dev/cu.wchusbserial14220
+  port: /dev/cu.wchusbserial14120
   baudrate: 9600
   enemyFocus: {fileID: 0}
   colorFocus: {r: 0.95, g: 0.7, b: 0.75, a: 1}
   playerNumber: 2
+  statsController: {fileID: 590759218}
 --- !u!54 &1215678813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2489,11 +2491,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textAccury: {fileID: 1622541818}
   textSpeed: {fileID: 661152244}
-  port: /dev/cu.wchusbserial14230
+  port: /dev/cu.wchusbserial14130
   baudrate: 9600
   enemyFocus: {fileID: 0}
   colorFocus: {r: 0.98039216, g: 0.8597871, b: 0.41176465, a: 1}
   playerNumber: 1
+  statsController: {fileID: 590759218}
 --- !u!1 &1609638750
 GameObject:
   m_ObjectHideFlags: 0
