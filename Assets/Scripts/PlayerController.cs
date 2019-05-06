@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 	public Transform enemyFocus;
 	public Color colorFocus;
 
+	public int playerNumber;
+
     void Start()
     {
 		InitKeyState();
@@ -49,17 +51,25 @@ public class PlayerController : MonoBehaviour
 	private void InitKeyState() 
 	{
 		// blue
+		keyState.Add("+u0", false); //
+		
 		keyState.Add("+u1", false);
 		keyState.Add("+u2", false);
 		keyState.Add("+u3", false);
+
+		keyState.Add("+u4", false); //
 
 		keyState.Add("+u5", false);
 		keyState.Add("+u6", false);
 		keyState.Add("+u7", false);
 
+		keyState.Add("+u8", false); //
+
 		keyState.Add("+u9", false);
 		keyState.Add("+uA", false);
 		keyState.Add("+uB", false);
+
+		keyState.Add("+uC", false); //
 
 		keyState.Add("+uD", false);
 		keyState.Add("+uE", false);
@@ -78,11 +88,71 @@ public class PlayerController : MonoBehaviour
 		keyState.Add("+y9", false);
 		keyState.Add("+yA", false);
 
+		keyState.Add("+yB", false); //
+		keyState.Add("+yC", false); //
+		keyState.Add("+yD", false); //
+		keyState.Add("+yE", false); //
+		keyState.Add("+yF", false); //
+
 		// red
+		keyState.Add("+r0", false); //
+
 		keyState.Add("+r1", false);
 		keyState.Add("+r2", false);
+
+		keyState.Add("+r3", false); //
+		keyState.Add("+r4", false); //
+		keyState.Add("+r5", false); //
+		keyState.Add("+r6", false); //
+
 		keyState.Add("+r7", false);
+
+		keyState.Add("+r8", false); //
+		keyState.Add("+r9", false); //
+		keyState.Add("+rA", false); //
+
 		keyState.Add("+rB", false);
+
+		keyState.Add("+rC", false); //
+		keyState.Add("+rD", false); //
+		keyState.Add("+rE", false); //
+		keyState.Add("+rF", false); //
+
+		// green
+		keyState.Add("+g0", false); //
+		keyState.Add("+g1", false); //
+		keyState.Add("+g2", false); //
+		keyState.Add("+g3", false); //
+		keyState.Add("+g4", false); //
+		keyState.Add("+g5", false); //
+		keyState.Add("+g6", false); //
+		keyState.Add("+g7", false); //
+		keyState.Add("+g8", false); //
+		keyState.Add("+g9", false); //
+		keyState.Add("+gA", false); //
+		keyState.Add("+gB", false); //
+		keyState.Add("+gC", false); //
+		keyState.Add("+gD", false); //
+		keyState.Add("+gE", false); //
+		keyState.Add("+gF", false); //
+
+		// white
+		keyState.Add("+w0", false); //
+		keyState.Add("+w1", false); //
+		keyState.Add("+w2", false); //
+		keyState.Add("+w3", false); //
+		keyState.Add("+w4", false); //
+		keyState.Add("+w5", false); //
+		keyState.Add("+w6", false); //
+		keyState.Add("+w7", false); //
+		keyState.Add("+w8", false); //
+		keyState.Add("+w9", false); //
+		keyState.Add("+wA", false); //
+		keyState.Add("+wB", false); //
+		keyState.Add("+wC", false); //
+		keyState.Add("+wD", false); //
+		keyState.Add("+wE", false); //
+		keyState.Add("+wF", false); //
 	}
 
     public void Read()

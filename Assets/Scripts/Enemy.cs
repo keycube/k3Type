@@ -90,6 +90,15 @@ public class Enemy : MonoBehaviour {
 				Destroy(other.gameObject);
 			}
 		}
+		if (other.tag == "Player")
+		{
+			if (transform.parent.transform.childCount <= 1)
+			{
+				GameController gc = transform.GetComponentInParent<GameController>();
+				gc.StartSpawn(); 
+			}
+			Destroy(gameObject);
+		}
 	}
 
 	IEnumerator slowForXSecond(float time)

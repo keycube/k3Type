@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 	private int enemies;
 
 	public StatsController statsController;
+	public LogsController logsController;
 
 	
 	void Start () 
@@ -30,6 +31,8 @@ public class GameController : MonoBehaviour
 		player[0].OnKeyPressed += PlayerController_OnKeyPressedZero;
 		player[1].OnKeyPressed += PlayerController_OnKeyPressedOne;
 		player[2].OnKeyPressed += PlayerController_OnKeyPressedTwo;
+
+		logsController.Append("First Test");
 	}
 
 
@@ -57,6 +60,12 @@ public class GameController : MonoBehaviour
 			}			
 			yield return new WaitForSeconds(spawnWait);
 		}
+	}
+
+	public void StartSpawn() 
+	{
+		statsController.Save();
+		StartCoroutine(SpawnWaves());
 	}
 
 	private void PlayerController_OnKeyPressedZero(string letter)
