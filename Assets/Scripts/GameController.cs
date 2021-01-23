@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
 
 	void Update()
     {
+		/*
         if (Input.GetKeyDown(("a")))
         {
 			Debug.Log("newPlayer0");
@@ -60,6 +61,7 @@ public class GameController : MonoBehaviour
 			Debug.Log("newPlayer2");
 			logsController.Append("newPlayer,2");
         }
+		*/
     }
 
 	public void Lose() 
@@ -101,7 +103,7 @@ public class GameController : MonoBehaviour
 			Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 			Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, this.transform);
 			statsController.UpdateCubesGenerated(1);
-			enemy.Spawn(words[i].ToLower(), player[pR].gameObject.transform.position, waiveEnemySpeed);
+			enemy.Spawn(words[i].ToLower(), player[0].gameObject.transform.position, waiveEnemySpeed);
 			enemies += 1;
 			pR += 1;
 			if (pR > 2)
@@ -135,7 +137,7 @@ public class GameController : MonoBehaviour
 
 	private void PlayerOnKeyPressed(int playerNumber, string letter)
 	{
-		statsController.UpdateKeysPressed(1);
+		//statsController.UpdateKeysPressed(1);
 
 		bool isLetterCorrect = false;
 

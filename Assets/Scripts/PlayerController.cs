@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
 
         //logsController.AddKeyPress(playerNumber, code, 1);
         logsController.Append(playerNumber.ToString() + "," + code + ",1");
+        statsController.UpdateKeysPressed(1);
 
 		keyState[code] = true;
         switch (code)
@@ -294,18 +295,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        /* 
-        for (int i = a; i <= z; i++)
-        {
-            if (Input.GetKeyDown((KeyCode)i))
+        if (playerNumber == 0) {
+            for (int i = a; i <= z; i++)
             {
-                if (OnKeyPressed != null)
+                if (Input.GetKeyDown((KeyCode)i))
                 {
-                    OnKeyPressed(((KeyCode)i).ToString());
+                    if (OnKeyPressed != null)
+                    {
+                        OnKeyPressed(((KeyCode)i).ToString());
+                    }
                 }
             }
         }
-        */
     }
 
     public void updateAccuary(bool b)
